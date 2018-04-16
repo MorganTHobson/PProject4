@@ -16,11 +16,7 @@ for line in sys.stdin.readlines():
     if write and not first:
       write = False
       for value in values:
-        sys.stdout.write(value + " ")
-        if int(key[0]) < int(key[1]):
-          sys.stdout.write(key[0] + " " + key[1] + "\n")
-        else:
-          sys.stdout.write(key[1] + " " + key[0] + "\n")
+        sys.stdout.write(value + " " + key[0] + " " + key[1] + "\n")
 
     else:
       first = False

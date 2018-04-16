@@ -15,7 +15,7 @@ for line in sys.stdin.readlines():
   friends_str = friends_str[:-1]
 
   for friend in friends:
-    if user < friend:
+    if int(user) < int(friend):
       sys.stdout.write(user + " " + friend + " " + friends_str + "\n")
     else:
       sys.stdout.write(friend + " " + user + " " + friends_str + "\n")
