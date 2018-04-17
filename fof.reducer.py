@@ -2,28 +2,23 @@
 #Python Reducer for FOF Map/Reduce
 import sys
 
-key = ["", ""]
-values = set()
+triple = ["", "", ""]
+count = 0
 first = True
-write = False
 
 for line in sys.stdin.readlines():
-  tokens = line.split()
+  kv = line.split("\t")
+  key = kv[0].split()
+  value = int(kv[1])
 
-  match = tokens[0] == key[0] and tokens[1] == key[1]
+  match = triple[0] == key[0] and triple[1] == key[1] and triple[2] == key[2]
 
-  if not match:
-    if write and not first:
-      write = False
-      for value in values:
-        sys.stdout.write(value + " " + key[0] + " " + key[1] + "\n")
-
-    else:
-      first = False
-
-    key = [tokens[0], tokens[1]]
-    values = set(tokens[2:])
-
+  if match:
+    count += value
   else:
-    values = values.intersection(tokens[2:])
-    write = True
+    if count == 3:
+      sys.stdout.write(triple[0] + " " + triple[1] + " " + triple[2] + "\n")
+      sys.stdout.write(triple[1] + " " + triple[0] + " " + triple[2] + "\n")
+      sys.stdout.write(triple[2] + " " + triple[0] + " " + triple[1] + "\n")
+    count = value
+    triple = key
